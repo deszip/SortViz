@@ -8,15 +8,6 @@
 
 import UIKit
 
-extension String {
-    
-    var numberValue: NSNumber? {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter.number(from: self)
-    }
-}
-
 class InputViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
@@ -37,12 +28,11 @@ class InputViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func done(_ sender: UIBarButtonItem) {
-        if let data = textField.text?.components(separatedBy: ",").flatMap({ $0.numberValue?.int64Value }) {
-            if data.count == 0 {
-                DebugAlertController.presentAlert(title: "Nothing to sort", onController: self)
-            } else {
-                dataLoadingHandler?(data)
-            }
+        let data = InputParser.values(fromString: textField.text)
+        if data.count == 0 {
+            DebugAlertController.presentAlert(title: "Nothing to sort", onController: self)
+        } else {
+            dataLoadingHandler?(data)
         }
         self.dismiss(animated: true, completion: nil)
     }
