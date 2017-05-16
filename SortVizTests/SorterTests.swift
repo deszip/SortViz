@@ -61,7 +61,7 @@ class SorterTests: XCTestCase {
         let expectation = self.expectation(description: "")
         
         sorter?.loadData([3, 2, 1]) { status, error in
-            expect(self.getElements()[0].steps!.count).to(equal(3))
+            expect(self.getElements()[0].steps!.count).to(equal(4))
             expectation.fulfill()
         }
         
@@ -104,15 +104,12 @@ class SorterTests: XCTestCase {
         let expectation = self.expectation(description: "")
         
         sorter?.loadData([3, 2, 1]) { status, error in
-            self.sorter?.stepForward()
-            
-            let elements = self.getElements()
-            
-            let element_1 = self.element(from: elements, withValue: 1)!
-            let element_2 = self.element(from: elements, withValue: 2)!
-            let element_3 = self.element(from: elements, withValue: 3)!
-            
-            expectation.fulfill()
+            self.sorter?.stepForward() { status, error in
+                let elements = self.getElements()
+                self.validateOrder(elements: elements, values: [2, 3, 1])
+                
+                expectation.fulfill()
+            }
         }
         
         self.waitForExpectations(timeout: 0.5, handler: nil)
@@ -123,6 +120,12 @@ class SorterTests: XCTestCase {
     private func validateSteps(element: Element, indexes: [Int64]) {
         indexes.enumerated().forEach { index, value in
             expect(self.step(from: element, withOrder: Int64(index))!.index).to(equal(value))
+        }
+    }
+    
+    private func validateOrder(elements: [Element], values: [Int64]) {
+        values.enumerated().forEach { index, value in
+            expect(self.element(from: elements, withValue: value)!.currentIndex).to(equal(Int64(index)))
         }
     }
     

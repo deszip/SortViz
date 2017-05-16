@@ -66,6 +66,14 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         
     }
     
+    @IBAction func stop(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    @IBAction func randomize(_ sender: UIBarButtonItem) {
+        
+    }
+    
     @IBAction func rewind(_ sender: UIBarButtonItem) {
         sorter?.stepBack()
     }

@@ -59,7 +59,11 @@ class Sorter {
         
     }
     
-    func stepForward() {
+    func stop() {
+        
+    }
+    
+    func stepForward(_ completion: Completion? = nil) {
         if currentStep >= stepsCount - 1 {
             return
         }
@@ -67,11 +71,11 @@ class Sorter {
         workingContext.perform {
             self.currentStep += 1
             self.transitionToStep(self.currentStep)
-            self.save()
+            self.save(completion: completion)
         }
     }
     
-    func stepBack() {
+    func stepBack(_ completion: Completion? = nil) {
         if self.currentStep <= 0 {
             return
         }
@@ -79,7 +83,7 @@ class Sorter {
         workingContext.perform {
             self.currentStep -= 1
             self.transitionToStep(self.currentStep)
-            self.save()
+            self.save(completion: completion)
         }
     }
     
@@ -175,8 +179,6 @@ class Sorter {
         let data = elements.map { $0.value }
         self.stepsCount = 0
         let _ = InsertSort.sort(data) { values in
-            //print("\(fromIndex) -> \(toIndex)")
-            
             elements.forEach { element in
                 let step = Step(context: self.workingContext)
                 step.order = stepsCount
@@ -184,24 +186,6 @@ class Sorter {
                 element.addToSteps(step)
             }
             
-            /*
-            elements.forEach { element in
-                let step = Step(context: self.workingContext)
-                step.order = stepsCount
-                
-                if element.currentIndex > fromIndex {
-                   step.index = element.currentIndex - 1
-                }
-                if element.currentIndex >= toIndex {
-                    step.index = element.currentIndex + 1
-                }
-                
-                if element.currentIndex == fromIndex {
-                    step.index = toIndex
-                }
-                element.addToSteps(step)
-            }
-            */
             stepsCount += 1
         }
         
