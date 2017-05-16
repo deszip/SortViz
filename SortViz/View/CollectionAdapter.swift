@@ -34,7 +34,7 @@ class CollectionAdapter<T: NSManagedObject>: FRCDataSourceAdapter<T>, UICollecti
             switch (changeType) {
             case .insert: collectionView?.insertItems(at: indexPaths)
             case .delete: collectionView?.deleteItems(at: indexPaths)
-            case .update: ()//collectionView?.reloadItems(at: indexPaths)
+            case .update: ()
             case .move:
                 if let fromIndexPath = indexPaths.first, let toIndexPath = indexPaths.last {
                     if fromIndexPath != toIndexPath {
@@ -62,7 +62,6 @@ class CollectionAdapter<T: NSManagedObject>: FRCDataSourceAdapter<T>, UICollecti
     }
     
     override func willChangeContent() {
-        print("willChangeContent")
         sectionChanges.removeAll()
         objectChanges.removeAll()
     }
@@ -72,29 +71,23 @@ class CollectionAdapter<T: NSManagedObject>: FRCDataSourceAdapter<T>, UICollecti
             case .insert:
                 if let insertIndexPath = newIndexPath {
                     objectChanges.append((changeType, [insertIndexPath]))
-                    print("Insert: \(insertIndexPath)")
                 }
             case .delete:
                 if let deleteIndexPath = indexPath {
                     objectChanges.append((changeType, [deleteIndexPath]))
-                    print("Delete: \(deleteIndexPath)")
                 }
             case .update:
                 if let indexPath = indexPath {
                     objectChanges.append((changeType, [indexPath]))
-                    print("Update: \(indexPath)")
                 }
             case .move:
                 if let old = indexPath, let new = newIndexPath {
                     objectChanges.append((changeType, [old, new]))
-                    print("Move: \(old) -> \(new)")
                 }
         }
     }
     
     override func didChangeContent() {
-        print("didChangeContent")
-        
         self.collectionView?.performBatchUpdates({ [weak self] in
             self?.applyObjectChanges()
             self?.applySectionChanges()

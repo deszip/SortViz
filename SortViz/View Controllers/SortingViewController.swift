@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SortingViewController.swift
 //  SortViz
 //
 //  Created by Deszip on 14/05/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -32,20 +32,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         viewContext.automaticallyMergesChangesFromParent = true
         
         // Collection view
-        let ds = SVElementDataSource(context: contextProvider.viewContext)
-        do {
-            let cellBuilder = CellBuilder<Element>(collectionView: collectionView, cellIdentifier: "ElementCell")
-            let adapter = CollectionAdapter(collectionView: collectionView, cellBuilder: cellBuilder)
-            adapter.cellBuildingHandler = { cell, element in
-                if let cell = cell as? ElementCell {
-                    cell.setValue(element.value, maxValue: self.data.max() ?? 0)
-                    print("Build cell: element: \(element.value), cell: \(cell)")
-                }
-            }
-            try ds.bind(adapter)
-        } catch {
-            print("Error: \(error)")
-        }
+        buildDataSource(contextProvider: contextProvider)
         
         // Sorter
         sorter = Sorter(context: contextProvider.workingContext)
@@ -60,18 +47,47 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout {
         })
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Segue.inputController.rawValue {
+            (segue.destination as? InputViewController)?.dataLoadingHandler = { data in
+                self.data = data
+                self.sorter?.loadData(data)
+            }
+        }
+    }
+    
+    // MARK: - Setup -
+    
+    private func buildDataSource(contextProvider: SVContextProvider) {
+        let ds = SVElementDataSource(context: contextProvider.viewContext)
+        do {
+            let cellBuilder = CellBuilder<Element>(collectionView: collectionView, cellIdentifier: "ElementCell")
+            let adapter = CollectionAdapter(collectionView: collectionView, cellBuilder: cellBuilder)
+            adapter.cellBuildingHandler = { cell, element in
+                if let cell = cell as? ElementCell {
+                    cell.setValue(element.value, maxValue: self.data.max() ?? 0)
+                    print("Build cell: element: \(element.value), cell: \(cell)")
+                }
+            }
+            try ds.bind(adapter)
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    
     // MARK: - Actions -
     
     @IBAction func run(_ sender: UIBarButtonItem) {
-        
+        sorter?.run()
     }
     
     @IBAction func stop(_ sender: UIBarButtonItem) {
-        
+        sorter?.stop()
     }
     
     @IBAction func randomize(_ sender: UIBarButtonItem) {
-        
+        sorter?.stop()
+        sorter?.randomize()
     }
     
     @IBAction func rewind(_ sender: UIBarButtonItem) {

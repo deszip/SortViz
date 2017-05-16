@@ -9,6 +9,20 @@
 import Foundation
 import CoreData
 
+extension MutableCollection where Indices.Iterator.Element == Index {
+    mutating func shuffle() {
+        let c = count
+        guard c > 1 else { return }
+        
+        for (firstUnshuffled , unshuffledCount) in zip(indices, stride(from: c, to: 1, by: -1)) {
+            let d: IndexDistance = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
+            guard d != 0 else { continue }
+            let i = index(firstUnshuffled, offsetBy: d)
+            swap(&self[firstUnshuffled], &self[i])
+        }
+    }
+}
+
 protocol SorterDelegate: class {
     func didMoveItem(fromIndex: Int, toIndex: Int)
     func itemWasPlaced(atIndex: Int)
@@ -26,6 +40,7 @@ class Sorter {
     
     private var currentStep: Int64 = 0
     private var stepsCount: Int64 = 0
+    private var timer: Timer?
     
     // MARK: - Initialization -
     
@@ -52,19 +67,23 @@ class Sorter {
     // MARK: - Moving over the iterations -
     
     func run() {
-        /*
-         - get distance to the end of the data (length - currentStep)
-         - call stepForward with delay to get to the end of sequence
-         */
-        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { [weak self] timer in
+            self?.stepForward() { status, error in
+                if !status {
+                    timer.invalidate()
+                }
+            }
+        })
+        timer?.fire()
     }
     
     func stop() {
-        
+        timer?.invalidate()
     }
     
     func stepForward(_ completion: Completion? = nil) {
         if currentStep >= stepsCount - 1 {
+            completion?(false, NSError(domain: "", code: 42, userInfo: nil))
             return
         }
         
@@ -77,6 +96,7 @@ class Sorter {
     
     func stepBack(_ completion: Completion? = nil) {
         if self.currentStep <= 0 {
+            completion?(false, NSError(domain: "", code: 42, userInfo: nil))
             return
         }
         
@@ -91,6 +111,7 @@ class Sorter {
     
     func loadData(_ data: Array<Int64>, completion: Completion? = nil) {
         cleanElements()
+        currentStep = 0
         
         workingContext.perform {
             let elements = self.buildElements(data)
@@ -100,26 +121,17 @@ class Sorter {
     }
     
     func randomize() {
-        /*
-         - randomize currently loaded values
-         - call loadData() for them
-         */
-        
+        var values = getElements().map { $0.value }
+        values.shuffle()
+        loadData(values)
     }
     
     func sort() {
-        /*
-         - sort currently loaded values
-         - call loadData() for them
-         */
+        loadData(getElements().map { $0.value }.sorted())
     }
     
     func reverse() {
-        /*
-         - sort currently loaded values
-         - reverse values
-         - call loadData() for them
-         */
+        loadData(getElements().map { $0.value }.sorted().reversed())
     }
     
     // MARK: - Tools -
@@ -188,10 +200,6 @@ class Sorter {
             
             stepsCount += 1
         }
-        
-        elements.forEach { element in
-            print("Element: \(element.value), steps: \(element.steps)")
-        }
     }
     
     private func save(completion: Completion? = nil) {
@@ -212,7 +220,7 @@ class InsertSort {
 
     static func sort(_ array: Array<Int64>, progress:SortProgress) -> Array<Int64> {
         progress(array)
-        if array.count == 1 {
+        if array.count <= 1 {
             return array
         }
         
@@ -224,8 +232,7 @@ class InsertSort {
                 if element < pair {
                     array.remove(at: j + 1)
                     array.insert(element, at: j)
-                    
-                    //progress(Int64(j) + 1, Int64(j))
+
                     progress(array)
                 }
             }

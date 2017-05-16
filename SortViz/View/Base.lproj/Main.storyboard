@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Sorting View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SortViz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SortingViewController" customModule="SortViz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -70,6 +70,13 @@
                                             <action selector="randomize:" destination="BYZ-38-t0r" id="ke4-iW-SP4"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="E4g-GX-a6v"/>
+                                    <barButtonItem systemItem="add" id="NJZ-aZ-KW5">
+                                        <connections>
+                                            <action selector="reverse:" destination="BYZ-38-t0r" id="do5-ao-tc7"/>
+                                            <segue destination="y6B-OC-rJp" kind="presentation" identifier="InputController" id="w6O-em-wgf"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -91,6 +98,82 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="86" y="20"/>
+        </scene>
+        <!--Input View Controller-->
+        <scene sceneID="qrY-WP-DEF">
+            <objects>
+                <viewController id="y6B-OC-rJp" customClass="InputViewController" customModule="SortViz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ear-1t-6ea"/>
+                        <viewControllerLayoutGuide type="bottom" id="gpb-3D-Y7O"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TXw-uO-j2L">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="BJ4-kT-Fby">
+                                <rect key="frame" x="0.0" y="20" width="414" height="200"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Txi-2V-LKZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="sxZ-05-aai"/>
+                                        </constraints>
+                                        <items>
+                                            <barButtonItem systemItem="cancel" id="x5o-GY-6Ff">
+                                                <connections>
+                                                    <action selector="cancel:" destination="y6B-OC-rJp" id="noo-JJ-ib8"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="flexibleSpace" id="KiS-zU-PtA"/>
+                                            <barButtonItem systemItem="done" id="xiE-gK-gtG">
+                                                <connections>
+                                                    <action selector="done:" destination="y6B-OC-rJp" id="1xN-Kc-Pyg"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type in some numbers to play with. Separate with comma." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxk-6K-DSI">
+                                        <rect key="frame" x="0.0" y="44.000000000000007" width="414" height="40.666666666666679"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jrz-zZ-EMw">
+                                        <rect key="frame" x="0.0" y="84.666666666666686" width="414" height="115.33333333333331"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="y6B-OC-rJp" id="Z2Q-Ld-gPF"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="vxk-6K-DSI" firstAttribute="leading" secondItem="BJ4-kT-Fby" secondAttribute="leading" id="4v0-OO-alD"/>
+                                    <constraint firstItem="Jrz-zZ-EMw" firstAttribute="leading" secondItem="BJ4-kT-Fby" secondAttribute="leading" id="Ata-sj-7N6"/>
+                                    <constraint firstAttribute="trailing" secondItem="Jrz-zZ-EMw" secondAttribute="trailing" id="CP9-ls-0hD"/>
+                                    <constraint firstAttribute="trailing" secondItem="Txi-2V-LKZ" secondAttribute="trailing" id="HOb-yF-zRe"/>
+                                    <constraint firstAttribute="height" constant="200" id="HVN-mP-Gq2"/>
+                                    <constraint firstItem="Txi-2V-LKZ" firstAttribute="leading" secondItem="BJ4-kT-Fby" secondAttribute="leading" id="Wkb-oQ-myu"/>
+                                    <constraint firstAttribute="trailing" secondItem="vxk-6K-DSI" secondAttribute="trailing" id="rbQ-Z6-FSq"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BJ4-kT-Fby" firstAttribute="leading" secondItem="TXw-uO-j2L" secondAttribute="leading" id="Gbv-J4-do5"/>
+                            <constraint firstItem="BJ4-kT-Fby" firstAttribute="top" secondItem="ear-1t-6ea" secondAttribute="bottom" id="cc1-pu-UEB"/>
+                            <constraint firstAttribute="trailing" secondItem="BJ4-kT-Fby" secondAttribute="trailing" id="qca-tV-Lbp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textField" destination="Jrz-zZ-EMw" id="s7i-px-9zn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aaf-aS-KeZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="913.04347826086962" y="19.565217391304348"/>
         </scene>
     </scenes>
 </document>
