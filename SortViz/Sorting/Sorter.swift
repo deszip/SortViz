@@ -9,20 +9,6 @@
 import Foundation
 import CoreData
 
-extension MutableCollection where Indices.Iterator.Element == Index {
-    mutating func shuffle() {
-        let c = count
-        guard c > 1 else { return }
-        
-        for (firstUnshuffled , unshuffledCount) in zip(indices, stride(from: c, to: 1, by: -1)) {
-            let d: IndexDistance = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
-            guard d != 0 else { continue }
-            let i = index(firstUnshuffled, offsetBy: d)
-            swap(&self[firstUnshuffled], &self[i])
-        }
-    }
-}
-
 protocol SorterDelegate: class {
     func didMoveItem(fromIndex: Int, toIndex: Int)
     func itemWasPlaced(atIndex: Int)
@@ -121,9 +107,7 @@ class Sorter {
     }
     
     func randomize() {
-        var values = getElements().map { $0.value }
-        values.shuffle()
-        loadData(values)
+        loadData(getElements().map { $0.value }.shuffled())
     }
     
     func sort() {
