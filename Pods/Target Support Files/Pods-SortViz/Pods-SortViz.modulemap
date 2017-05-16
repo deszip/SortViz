@@ -1,0 +1,6 @@
+framework module Pods_SortViz {
+  umbrella header "Pods-SortViz-umbrella.h"
+
+  export *
+  module * { export * }
+}

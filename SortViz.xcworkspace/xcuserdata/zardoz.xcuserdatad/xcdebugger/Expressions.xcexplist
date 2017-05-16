@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "Sorter.stepForward() -&gt; ():Sorter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentStep">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Sorter.stepBack() -&gt; ():Sorter.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentStep">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Sorter.(transitionToStep(Int64) -&gt; ()).(closure #1):Sorter.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
