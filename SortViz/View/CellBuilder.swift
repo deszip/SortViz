@@ -18,6 +18,9 @@ class CellBuilder<Entity: NSManagedObject> {
     init(collectionView: UICollectionView, cellIdentifier: String) {
         self.collectionView = collectionView
         self.cellIdentifier = cellIdentifier
+        
+        let cellNib = UINib(nibName: "ElementCell", bundle: Bundle.main)
+        collectionView.register(cellNib, forCellWithReuseIdentifier: "ElementCell")
     }
     
     func buildCell(entity: Entity, indexPath: IndexPath) -> UICollectionViewCell {

@@ -11,6 +11,7 @@ import UIKit
 class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var inputField: UITextField!
     
     private var sorter: Sorter?
     private var data: [Int64] = []
@@ -20,11 +21,8 @@ class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cellNib = UINib(nibName: "ElementCell", bundle: Bundle.main)
-        collectionView.register(cellNib, forCellWithReuseIdentifier: "ElementCell")
-        
-        // Test data
-        data = [10,9,8,7,6,5,4,3,2,1]
+        // Initial data
+        loadRandomData()
         
         // Dependencies
         let contextProvider = SVContextProvider()
@@ -47,15 +45,6 @@ class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayou
         })
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Segue.inputController.rawValue {
-            (segue.destination as? InputViewController)?.dataLoadingHandler = { data in
-                self.data = data
-                self.sorter?.loadData(data)
-            }
-        }
-    }
-    
     // MARK: - Setup -
     
     private func buildDataSource(contextProvider: SVContextProvider) {
@@ -66,7 +55,6 @@ class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayou
             adapter.cellBuildingHandler = { cell, element in
                 if let cell = cell as? ElementCell {
                     cell.setValue(element.value, maxValue: self.data.max() ?? 0)
-                    print("Build cell: element: \(element.value), cell: \(cell)")
                 }
             }
             try ds.bind(adapter)
@@ -75,7 +63,47 @@ class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayou
         }
     }
     
+    private func loadRandomData() {
+        data = SequenceGenerator.randomSequence()
+        sorter?.loadData(data)
+        inputField.text = data.map({ String($0) }).joined(separator: ",")
+    }
+    
     // MARK: - Actions -
+    
+    @IBAction func loadRandomData(_ sender: UIButton) {
+        loadRandomData()
+    }
+    
+    @IBAction func inputChanged(_ sender: UITextField) {
+        let inputData = InputParser.values(fromString: sender.text)
+        if inputData.count >= 0 {
+            data = inputData
+            sorter?.loadData(data)
+        }
+    }
+    
+    @IBAction func orderChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+            case 0:
+                sorter?.reverse()
+                break
+            case 1:
+                sorter?.sort()
+                break
+            case 2:
+                sorter?.stop()
+                sorter?.randomize()
+                break
+            default: ()
+        }
+        
+    }
+    
+    @IBAction func toggle(_ sender: Any) {
+        // TODO: toggle icon depending on sorter state
+        sorter?.run()
+    }
     
     @IBAction func run(_ sender: UIBarButtonItem) {
         sorter?.run()
@@ -90,19 +118,21 @@ class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayou
         sorter?.randomize()
     }
     
-    @IBAction func rewind(_ sender: UIBarButtonItem) {
+    @IBAction func rewind(_ sender: Any) {
+        sorter?.stop()
         sorter?.stepBack()
     }
     
-    @IBAction func forward(_ sender: UIBarButtonItem) {
+    @IBAction func forward(_ sender: Any) {
+        sorter?.stop()
         sorter?.stepForward()
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout -
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = ((collectionView.frame.size.width - (CGFloat(data.count - 1) * 10)) / CGFloat(data.count))
-        let itemHeight = collectionView.frame.size.height - 20
+        let itemWidth = collectionView.frame.size.width / CGFloat(data.count)
+        let itemHeight = collectionView.frame.size.height
         
         return CGSize(width: itemWidth, height: itemHeight)
     }
@@ -112,7 +142,7 @@ class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 0
     }
     
 }

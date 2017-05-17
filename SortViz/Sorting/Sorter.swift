@@ -53,6 +53,7 @@ class Sorter {
     // MARK: - Moving over the iterations -
     
     func run() {
+        timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { [weak self] timer in
             self?.stepForward() { status, error in
                 if !status {
@@ -93,7 +94,7 @@ class Sorter {
         }
     }
     
-    func goToStep(_ step: Int64) {
+    func goToStep(_ step: Int64, completion: Completion? = nil) {
         if step >= 0 && step < stepsCount - 1 {
             currentStep = step
             workingContext.perform {

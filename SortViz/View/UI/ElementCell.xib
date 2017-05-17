@@ -19,18 +19,27 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAG-8G-yP3">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="261"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <rect key="frame" x="2" y="0.0" width="46" height="261"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gradient" translatesAutoresizingMaskIntoConstraints="NO" id="pA0-fv-pce">
+                                <rect key="frame" x="0.0" y="0.0" width="46" height="261"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="pA0-fv-pce" firstAttribute="top" secondItem="eAG-8G-yP3" secondAttribute="top" id="1Zp-BA-TSj"/>
                             <constraint firstAttribute="height" constant="261" id="cb7-Hn-Hcy"/>
+                            <constraint firstAttribute="trailing" secondItem="pA0-fv-pce" secondAttribute="trailing" id="lGP-tg-PvC"/>
+                            <constraint firstItem="pA0-fv-pce" firstAttribute="leading" secondItem="eAG-8G-yP3" secondAttribute="leading" id="oCc-Oa-B7l"/>
+                            <constraint firstAttribute="bottom" secondItem="pA0-fv-pce" secondAttribute="bottom" id="xV2-3x-29d"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="eAG-8G-yP3" secondAttribute="trailing" id="ah0-qh-pDu"/>
-                <constraint firstItem="eAG-8G-yP3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ifk-VR-ZC3"/>
+                <constraint firstAttribute="trailing" secondItem="eAG-8G-yP3" secondAttribute="trailing" constant="2" id="ah0-qh-pDu"/>
+                <constraint firstItem="eAG-8G-yP3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="ifk-VR-ZC3"/>
                 <constraint firstAttribute="bottom" secondItem="eAG-8G-yP3" secondAttribute="bottom" id="uOT-KX-2Iq"/>
             </constraints>
             <size key="customSize" width="50" height="261"/>
@@ -41,4 +50,7 @@
             <point key="canvasLocation" x="13" y="-29"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="Gradient" width="1700" height="1706"/>
+    </resources>
 </document>
