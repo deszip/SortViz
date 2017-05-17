@@ -93,6 +93,16 @@ class Sorter {
         }
     }
     
+    func goToStep(_ step: Int64) {
+        if step >= 0 && step < stepsCount - 1 {
+            currentStep = step
+            workingContext.perform {
+                self.transitionToStep(self.currentStep)
+                self.save(completion: completion)
+            }
+        }
+    }
+    
     // MARK: - Data processing -
     
     func loadData(_ data: Array<Int64>, completion: Completion? = nil) {
@@ -196,33 +206,6 @@ class Sorter {
                 completion?(false, error)
             }
         }
-    }
-    
-}
-
-class InsertSort {
-
-    static func sort(_ array: Array<Int64>, progress:SortProgress) -> Array<Int64> {
-        progress(array)
-        if array.count <= 1 {
-            return array
-        }
-        
-        var array = array
-        for i in 1...array.count - 1 {
-            let element = array[i]
-            for j in ((-1 + 1)...i).reversed() {
-                let pair = array[j]
-                if element < pair {
-                    array.remove(at: j + 1)
-                    array.insert(element, at: j)
-
-                    progress(array)
-                }
-            }
-        }
-        
-        return array
     }
     
 }
