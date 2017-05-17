@@ -10,8 +10,10 @@ import Foundation
 
 class InputParser {
     
+    private static let SeparatorsSet = CharacterSet(charactersIn: ",./: ")
+    
     class func values(fromString input: String?) -> [Int64] {
-        return input?.components(separatedBy: ",").flatMap { $0.numberValue?.int64Value } ?? []
+        return input?.components(separatedBy: InputParser.SeparatorsSet).flatMap { $0.numberValue?.int64Value } ?? []
     }
     
 }
