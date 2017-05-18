@@ -2,6 +2,8 @@
 Insertion sort visualization
 
 ### Build
+Checkout 'develop' branch.
+
 Open XCode workspace file and build.
 
 All dependencies are checked in.
