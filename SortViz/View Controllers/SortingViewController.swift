@@ -72,6 +72,7 @@ class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayou
     // MARK: - Actions -
     
     @IBAction func loadRandomData(_ sender: UIButton) {
+        inputField.resignFirstResponder()
         loadRandomData()
     }
     
@@ -81,6 +82,10 @@ class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayou
             data = inputData
             sorter?.loadData(data)
         }
+    }
+    
+    @IBAction func editingEnd(_ sender: UITextField) {
+        sender.resignFirstResponder()
     }
     
     @IBAction func orderChanged(_ sender: UISegmentedControl) {
@@ -97,7 +102,6 @@ class SortingViewController: UIViewController, UICollectionViewDelegateFlowLayou
                 break
             default: ()
         }
-        
     }
     
     @IBAction func toggle(_ sender: Any) {
