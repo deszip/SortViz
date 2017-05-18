@@ -21,49 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qwe-Ta-EuV">
-                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="J7J-WL-MeD"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem systemItem="rewind" id="FTy-DE-uOD">
-                                        <connections>
-                                            <action selector="rewind:" destination="BYZ-38-t0r" id="dBp-VW-Ifu"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="fixedSpace" id="6w2-DH-8n0"/>
-                                    <barButtonItem systemItem="fastForward" id="dsm-iB-0FV">
-                                        <connections>
-                                            <action selector="forward:" destination="BYZ-38-t0r" id="LCT-Fd-17y"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="fixedSpace" id="w0i-hY-4EZ"/>
-                                    <barButtonItem title="Run" id="8Hu-wp-QtE">
-                                        <connections>
-                                            <action selector="run:" destination="BYZ-38-t0r" id="y7z-GD-4HL"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="fixedSpace" id="hlS-t5-MM7"/>
-                                    <barButtonItem title="Stop" id="MsY-FH-3Dr">
-                                        <connections>
-                                            <action selector="stop:" destination="BYZ-38-t0r" id="zJO-sS-NbU"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="fixedSpace" id="HBy-89-8KB"/>
-                                    <barButtonItem title="Randomize" id="VYU-Cq-PMa">
-                                        <connections>
-                                            <action selector="randomize:" destination="BYZ-38-t0r" id="ke4-iW-SP4"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="flexibleSpace" id="E4g-GX-a6v"/>
-                                    <barButtonItem systemItem="add" id="NJZ-aZ-KW5">
-                                        <connections>
-                                            <action selector="reverse:" destination="BYZ-38-t0r" id="do5-ao-tc7"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UH6-1H-Ccr">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="242"/>
                                 <subviews>
@@ -230,15 +187,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Qwe-Ta-EuV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LdP-w5-R6G"/>
                             <constraint firstAttribute="trailing" secondItem="UH6-1H-Ccr" secondAttribute="trailing" id="OB5-l2-0ub"/>
                             <constraint firstItem="UH6-1H-Ccr" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Oot-1t-lCk"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XMZ-8q-yzU" secondAttribute="bottom" id="i2e-2m-dAP"/>
                             <constraint firstItem="XMZ-8q-yzU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="l6o-cz-Nsy"/>
                             <constraint firstItem="XMZ-8q-yzU" firstAttribute="top" secondItem="UH6-1H-Ccr" secondAttribute="bottom" id="t1Y-C7-a12"/>
                             <constraint firstItem="UH6-1H-Ccr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tNT-ev-hJa"/>
-                            <constraint firstItem="Qwe-Ta-EuV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="tRR-eG-WC5"/>
-                            <constraint firstAttribute="trailing" secondItem="Qwe-Ta-EuV" secondAttribute="trailing" id="wls-Lu-fN7"/>
                             <constraint firstAttribute="trailing" secondItem="XMZ-8q-yzU" secondAttribute="trailing" id="z2L-K8-JZZ"/>
                         </constraints>
                     </view>

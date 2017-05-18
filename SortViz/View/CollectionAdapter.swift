@@ -34,7 +34,7 @@ class CollectionAdapter<T: NSManagedObject>: FRCDataSourceAdapter<T>, UICollecti
             switch (changeType) {
             case .insert: collectionView?.insertItems(at: indexPaths)
             case .delete: collectionView?.deleteItems(at: indexPaths)
-            case .update: ()
+            case .update: () // Tired fighting UICollectionView bugs...
             case .move:
                 if let fromIndexPath = indexPaths.first, let toIndexPath = indexPaths.last {
                     if fromIndexPath != toIndexPath {

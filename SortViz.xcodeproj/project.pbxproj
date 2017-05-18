@@ -29,8 +29,6 @@
 		0E3B69761ECC47EA00C051B4 /* InputParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B69751ECC47EA00C051B4 /* InputParserTests.swift */; };
 		0E3B69781ECC60D100C051B4 /* InsertSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B69771ECC60D100C051B4 /* InsertSort.swift */; };
 		0E3B697A1ECD176A00C051B4 /* SequenceGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B69791ECD176A00C051B4 /* SequenceGenerator.swift */; };
-		0E5875111ECB63F4006CBB7B /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5875101ECB63F4006CBB7B /* InputViewController.swift */; };
-		0E5875131ECB6639006CBB7B /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5875121ECB6639006CBB7B /* Segue.swift */; };
 		7FEFE68A43800C714D79B037 /* Pods_SortVizTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20EA5925D0F5AEE3F8E609D9 /* Pods_SortVizTests.framework */; };
 		E47841DFA61789617D04232E /* Pods_SortViz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCBB4D14167540072EA8781 /* Pods_SortViz.framework */; };
 /* End PBXBuildFile section */
@@ -72,8 +70,6 @@
 		0E3B69751ECC47EA00C051B4 /* InputParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputParserTests.swift; sourceTree = "<group>"; };
 		0E3B69771ECC60D100C051B4 /* InsertSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertSort.swift; sourceTree = "<group>"; };
 		0E3B69791ECD176A00C051B4 /* SequenceGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceGenerator.swift; sourceTree = "<group>"; };
-		0E5875101ECB63F4006CBB7B /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
-		0E5875121ECB6639006CBB7B /* Segue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
 		20EA5925D0F5AEE3F8E609D9 /* Pods_SortVizTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SortVizTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BCBB4D14167540072EA8781 /* Pods_SortViz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SortViz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C42DB68269053D4E5228D59 /* Pods-SortVizTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SortVizTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SortVizTests/Pods-SortVizTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,8 +146,8 @@
 		0E07F88A1EC8C9DC00E18D22 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0E07F8A41EC8D77500E18D22 /* FRCDataSource.swift */,
 				0E07F88B1EC8C9DC00E18D22 /* SortViz.xcdatamodeld */,
+				0E07F8A41EC8D77500E18D22 /* FRCDataSource.swift */,
 				0E07F8A61EC8D81000E18D22 /* SVElementDataSource.swift */,
 				0E07F8A81EC8D89F00E18D22 /* SVContextProvider.swift */,
 			);
@@ -179,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				0E3B69651ECB70AF00C051B4 /* UI */,
-				0E5875121ECB6639006CBB7B /* Segue.swift */,
 				0E07F8AC1EC8D97F00E18D22 /* CellBuilder.swift */,
 				0E07F8AA1EC8D94F00E18D22 /* CollectionAdapter.swift */,
 				0E07F8A01EC8CC9100E18D22 /* ElementCell.swift */,
@@ -191,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				0E07F8961EC8CA0B00E18D22 /* SortingViewController.swift */,
-				0E5875101ECB63F4006CBB7B /* InputViewController.swift */,
 				0E3B69631ECB6CA400C051B4 /* DebugAlertController.swift */,
 			);
 			path = "View Controllers";
@@ -445,7 +439,6 @@
 			files = (
 				0E3B69781ECC60D100C051B4 /* InsertSort.swift in Sources */,
 				0E3B69641ECB6CA400C051B4 /* DebugAlertController.swift in Sources */,
-				0E5875111ECB63F4006CBB7B /* InputViewController.swift in Sources */,
 				0E07F8931EC8CA0300E18D22 /* Sorter.swift in Sources */,
 				0E07F8A21EC8CC9100E18D22 /* ElementCell.swift in Sources */,
 				0E07F88D1EC8C9DC00E18D22 /* SortViz.xcdatamodeld in Sources */,
@@ -454,7 +447,6 @@
 				0E3B697A1ECD176A00C051B4 /* SequenceGenerator.swift in Sources */,
 				0E07F8AD1EC8D97F00E18D22 /* CellBuilder.swift in Sources */,
 				0E3B69721ECB742F00C051B4 /* InputParser.swift in Sources */,
-				0E5875131ECB6639006CBB7B /* Segue.swift in Sources */,
 				0E07F8971EC8CA0B00E18D22 /* SortingViewController.swift in Sources */,
 				0E07F8A51EC8D77500E18D22 /* FRCDataSource.swift in Sources */,
 				0E07F8A71EC8D81000E18D22 /* SVElementDataSource.swift in Sources */,

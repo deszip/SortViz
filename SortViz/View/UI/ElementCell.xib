@@ -51,6 +51,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Gradient" width="1700" height="1706"/>
+        <image name="Gradient" width="191" height="1183"/>
     </resources>
 </document>
