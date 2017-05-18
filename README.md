@@ -23,3 +23,6 @@ You can use green buttons to go step by step forward and backwards through the s
 Use input field to load your data or button to the right to load random values.
 
 Segmented control options allows you to start with sorted data, sorted in reverse order or random ordering.
+
+### Screenshot
+![Screenshot](https://github.com/deszip/SortViz/blob/develop/Screenshot.png)
